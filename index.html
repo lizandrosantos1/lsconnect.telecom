@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planos e Combos - LS Connect Telecom</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #0052CC 0%, #00D9FF 100%);
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .whatsapp-btn:hover {
+            background: #1da753;
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0052CC 0%, #00D9FF 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Tabs */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 30px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            color: #333;
+        }
+
+        .tab-btn.active {
+            background: #0052CC;
+            color: white;
+            border-color: #0052CC;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,82,204,0.3);
+        }
+
+        .tab-btn:hover {
+            border-color: #0052CC;
+            color: #0052CC;
+        }
+
+        .tab-btn.active:hover {
+            color: white;
+        }
+
+        /* Content Sections */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Plans Grid */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .plan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #0052CC, #00D9FF);
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            box-shadow: 0 3px 10px rgba(255,215,0,0.3);
+        }
+
+        .plan-header {
+            margin-bottom: 25px;
+        }
+
+        .plan-name {
+            font-size: 28px;
+            color: #0052CC;
+            margin-bottom: 10px;
+        }
+
+        .plan-speed {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .plan-price {
+            font-size: 48px;
+            font-weight: 800;
+            color: #0052CC;
+            margin: 20px 0;
+            line-height: 1;
+        }
+
+        .plan-price small {
+            font-size: 16px;
+            color: #999;
+            font-weight: 400;
+        }
+
+        .price-breakdown {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #0052CC;
+        }
+
+        .price-breakdown p {
+            margin: 8px 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .price-breakdown .label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .price-breakdown .original {
+            text-decoration: line-through;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        .price-breakdown .savings {
+            color: #25D366;
+            font-weight: 700;
+            margin-top: 10px;
+            font-size: 15px;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin: 25px 0;
+        }
+
+        .plan-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 15px;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+
+        .plan-features li::before {
+            content: "✓";
+            color: #25D366;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .plan-cta {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #0052CC, #00D9FF);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .plan-cta:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,82,204,0.3);
+        }
+
+        .plan-cta:active {
+            transform: scale(0.98);
+        }
+
+        /* Comparison Table */
+        .comparison-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 60px;
+            overflow-x: auto;
+        }
+
+        .comparison-section h2 {
+            font-size: 32px;
+            color: #0052CC;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, #0052CC, #00D9FF);
+            color: white;
+        }
+
+        .comparison-table th {
+            padding: 20px;
+            text-align: left;
+            font-weight: 700;
+            border: none;
+        }
+
+        .comparison-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid #eee;
+            color: #555;
+        }
+
+        .comparison-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .feature-name {
+            font-weight: 600;
+            color: #333;
+            min-width: 200px;
+        }
+
+        .feature-value {
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .feature-value.yes {
+            color: #25D366;
+        }
+
+        .feature-value.no {
+            color: #999;
+        }
+
+        /* Info Section */
+        .info-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 60px;
+        }
+
+        .info-section h2 {
+            font-size: 32px;
+            color: #0052CC;
+            margin-bottom: 30px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .info-card {
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #0052CC;
+        }
+
+        .info-card h3 {
+            font-size: 20px;
+            color: #0052CC;
+            margin-bottom: 15px;
+        }
+
+        .info-card p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        footer p {
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #00D9FF;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Floating WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 999;
+            animation: pulse 2s infinite;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            animation: none;
+        }
+
+        .whatsapp-float a {
+            color: white;
+            font-size: 30px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .plan-price {
+                font-size: 36px;
+            }
+
+            .tabs-container {
+                gap: 10px;
+            }
+
+            .tab-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .comparison-section {
+                padding: 20px;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px;
+                font-size: 13px;
+            }
+
+            .feature-name {
+                min-width: 150px;
+            }
+
+            header .container {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .nav-links {
+                gap: 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <span>🤖 LS Connect</span>
+            </div>
+            <nav class="nav-links">
+                <a href="https://wa.me/5583987114547" class="whatsapp-btn">WhatsApp</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>📊 Planos e Combos Detalhados</h1>
+            <p>Escolha o melhor plano para sua casa ou negócio. Comparação completa de preços, velocidades e benefícios.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Tabs -->
+        <div class="tabs-container">
+            <button class="tab-btn active" onclick="switchTab('internet')">⚡ Internet</button>
+            <button class="tab-btn" onclick="switchTab('combos')">🎁 Combos</button>
+            <button class="tab-btn" onclick="switchTab('chips')">📱 Chips</button>
+            <button class="tab-btn" onclick="switchTab('tv')">📺 TV</button>
+            <button class="tab-btn" onclick="switchTab('comparacao')">📊 Comparação</button>
+        </div>
+
+        <!-- INTERNET TAB -->
+        <div id="internet" class="tab-content active">
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-name">60 Mega</div>
+                        <div class="plan-speed">60 Mbps de velocidade</div>
+                    </div>
+                    <div class="plan-price">R$ 65,00<small>/mês</small></div>
+                    <ul class="plan-features">
+                        <li>60 Mbps de velocidade</li>
+                        <li>WiFi 6 incluído</li>
+                        <li>Instalação grátis</li>
+                        <li>Suporte 24/7</li>
+                        <li>Sem contrato</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20plano%2060%20Mega" class="plan-cta">Contratar Agora</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-name">150 Mega</div>
+                        <div class="plan-speed">150 Mbps de velocidade</div>
+                    </div>
+                    <div class="plan-price">R$ 69,90<small>/mês</small></div>
+                    <ul class="plan-features">
+                        <li>150 Mbps de velocidade</li>
+                        <li>WiFi 6 incluído</li>
+                        <li>Instalação grátis</li>
+                        <li>Suporte 24/7</li>
+                        <li>Sem contrato</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20plano%20150%20Mega" class="plan-cta">Contratar Agora</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-name">250 Mega</div>
+                        <div class="plan-speed">250 Mbps de velocidade</div>
+                    </div>
+                    <div class="plan-price">R$ 75,90<small>/mês</small></div>
+                    <ul class="plan-features">
+                        <li>250 Mbps de velocidade</li>
+                        <li>WiFi 6 incluído</li>
+                        <li>Instalação grátis</li>
+                        <li>Suporte 24/7</li>
+                        <li>Sem contrato</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20plano%20250%20Mega" class="plan-cta">Contratar Agora</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-name">350 Mega</div>
+                        <div class="plan-speed">350 Mbps de velocidade</div>
+                    </div>
+                    <div class="plan-price">R$ 79,90<small>/mês</small></div>
+                    <ul class="plan-features">
+                        <li>350 Mbps de velocidade</li>
+                        <li>WiFi 6 incluído</li>
+                        <li>Instalação grátis</li>
+                        <li>Suporte 24/7</li>
+                        <li>Sem contrato</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20plano%20350%20Mega" class="plan-cta">Contratar Agora</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-name">450 Mega</div>
+                        <div class="plan-speed">450 Mbps de velocidade</div>
+                    </div>
+                    <div class="plan-price">R$ 85,90<small>/mês</small></div>
+                    <ul class="plan-features">
+                        <li>450 Mbps de velocidade</li>
+                        <li>WiFi 6 incluído</li>
+                        <li>Instalação grátis</li>
+                        <li>Suporte 24/7</li>
+                        <li>Sem contrato</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20plano%20450%20Mega" class="plan-cta">Contratar Agora</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-name">550 Mega</div>
+                        <div class="plan-speed">550 Mbps de velocidade</div>
+                    </div>
+                    <div class="plan-price">R$ 89,90<small>/mês</small></div>
+                    <ul class="plan-features">
+                        <li>550 Mbps de velocidade</li>
+                        <li>WiFi 6 incluído</li>
+                        <li>Instalação grátis</li>
+                        <li>Suporte 24/7</li>
+                        <li>Sem contrato</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20plano%20550%20Mega" class="plan-cta">Contratar Agora</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-name">600 Mega</div>
+                        <div class="plan-speed">600 Mbps de velocidade</div>
+                    </div>
+                    <div class="plan-price">R$ 99,90<small>/mês</small></div>
+                    <ul class="plan-features">
+                        <li>600 Mbps de velocidade</li>
+                        <li>WiFi 6 incluído</li>
+                        <li>Instalação grátis</li>
+                        <li>Suporte 24/7</li>
+                        <li>Sem contrato</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20plano%20600%20Mega" class="plan-cta">Contratar Agora</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-name">700 Mega</div>
+                        <div class="plan-speed">700 Mbps de velocidade</div>
+                    </div>
+                    <div class="plan-price">R$ 110,90<small>/mês</small></div>
+                    <ul class="plan-features">
+                        <li>700 Mbps de velocidade</li>
+                        <li>WiFi 6 incluído</li>
+                        <li>Instalação grátis</li>
+                        <li>Suporte 24/7</li>
+                        <li>Sem contrato</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20plano%20700%20Mega" class="plan-cta">Contratar Agora</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMBOS TAB -->
+        <div id="combos" class="tab-content">
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <div class="badge">ECONOMIZE</div>
+                    <div class="plan-header">
+                        <div class="plan-name">Combo 60 Mega</div>
+                        <div class="plan-speed">Internet + Chip + TV</div>
+                    </div>
+                    <div class="plan-price">R$ 129,90<small>/mês</small></div>
+                    <div class="price-breakdown">
+                        <p class="label">Separado custaria:</p>
+                        <p>Internet 60M: R$ 65,00</p>
+                        <p>Chip 11GB: R$ 49,90</p>
+                        <p>TV 250+: R$ 20,00</p>
+                        <p class="original">Total: R$ 134,90</p>
+                        <p class="savings">💰 Economiza: R$ 5,00/mês</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li>60 Mbps Internet</li>
+                        <li>Chip 11GB</li>
+                        <li>TV 250+ Canais</li>
+                        <li>Ligações Ilimitadas</li>
+                        <li>WhatsApp Grátis</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20Combo%2060%20Mega%20%2B%2011GB%20%2B%20TV" class="plan-cta">Contratar Agora</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="badge">ECONOMIZE</div>
+                    <div class="plan-header">
+                        <div class="plan-name">Combo 150 Mega</div>
+                        <div class="plan-speed">Internet + Chip + TV</div>
+                    </div>
+                    <div class="plan-price">R$ 144,70<small>/mês</small></div>
+                    <div class="price-breakdown">
+                        <p class="label">Separado custaria:</p>
+                        <p>Internet 150M: R$ 69,90</p>
+                        <p>Chip 15GB: R$ 54,60</p>
+                        <p>TV 250+: R$ 20,00</p>
+                        <p class="original">Total: R$ 144,50</p>
+                        <p class="savings">💰 Economiza: R$ -0,20</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li>150 Mbps Internet</li>
+                        <li>Chip 15GB</li>
+                        <li>TV 250+ Canais</li>
+                        <li>Ligações Ilimitadas</li>
+                        <li>WhatsApp Grátis</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20Combo%20150%20Mega%20%2B%2015GB%20%2B%20TV" class="plan-cta">Contratar Agora</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="badge">ECONOMIZE</div>
+                    <div class="plan-header">
+                        <div class="plan-name">Combo 250 Mega</div>
+                        <div class="plan-speed">Internet + Chip + TV</div>
+                    </div>
+                    <div class="plan-price">R$ 160,80<small>/mês</small></div>
+                    <div class="price-breakdown">
+                        <p class="label">Separado custaria:</p>
+                        <p>Internet 250M: R$ 75,90</p>
+                        <p>Chip 20GB: R$ 64,90</p>
+                        <p>TV 250+: R$ 20,00</p>
+                        <p class="original">Total: R$ 160,80</p>
+                        <p class="savings">💰 Economiza: R$ 0,00</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li>250 Mbps Internet</li>
+                        <li>Chip 20GB</li>
+                        <li>TV 250+ Canais</li>
+                        <li>Ligações Ilimitadas</li>
+                        <li>WhatsApp Grátis</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20Combo%20250%20Mega%20%2B%2020GB%20%2B%20TV" class="plan-cta">Contratar Agora</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="badge">ECONOMIZE</div>
+                    <div class="plan-header">
+                        <div class="plan-name">Combo 350 Mega</div>
+                        <div class="plan-speed">Internet + Chip + TV</div>
+                    </div>
+                    <div class="plan-price">R$ 174,80<small>/mês</small></div>
+                    <div class="price-breakdown">
+                        <p class="label">Separado custaria:</p>
+                        <p>Internet 350M: R$ 79,90</p>
+                        <p>Chip 28GB: R$ 74,90</p>
+                        <p>TV 250+: R$ 20,00</p>
+                        <p class="original">Total: R$ 174,80</p>
+                        <p class="savings">💰 Economiza: R$ 0,00</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li>350 Mbps Internet</li>
+                        <li>Chip 28GB</li>
+                        <li>TV 250+ Canais</li>
+                        <li>Ligações Ilimitadas</li>
+                        <li>WhatsApp Grátis</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20Combo%20350%20Mega%20%2B%2028GB%20%2B%20TV" class="plan-cta">Contratar Agora</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="badge">ECONOMIZE</div>
+                    <div class="plan-header">
+                        <div class="plan-name">Combo 450 Mega</div>
+                        <div class="plan-speed">Internet + Chip + TV</div>
+                    </div>
+                    <div class="plan-price">R$ 200,80<small>/mês</small></div>
+                    <div class="price-breakdown">
+                        <p class="label">Separado custaria:</p>
+                        <p>Internet 450M: R$ 85,90</p>
+                        <p>Chip 50GB: R$ 94,90</p>
+                        <p>TV 250+: R$ 20,00</p>
+                        <p class="original">Total: R$ 200,80</p>
+                        <p class="savings">💰 Economiza: R$ 0,00</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li>450 Mbps Internet</li>
+                        <li>Chip 50GB</li>
+                        <li>TV 250+ Canais</li>
+                        <li>Ligações Ilimitadas</li>
+                        <li>WhatsApp Grátis</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20Combo%20450%20Mega%20%2B%2050GB%20%2B%20TV" class="plan-cta">Contratar Agora</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="badge">ECONOMIZE</div>
+                    <div class="plan-header">
+                        <div class="plan-name">Combo 550 Mega</div>
+                        <div class="plan-speed">Internet + Chip + TV</div>
+                    </div>
+                    <div class="plan-price">R$ 204,80<small>/mês</small></div>
+                    <div class="price-breakdown">
+                        <p class="label">Separado custaria:</p>
+                        <p>Internet 550M: R$ 89,90</p>
+                        <p>Chip 50GB: R$ 94,90</p>
+                        <p>TV 250+: R$ 20,00</p>
+                        <p class="original">Total: R$ 204,80</p>
+                        <p class="savings">💰 Economiza: R$ 0,00</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li>550 Mbps Internet</li>
+                        <li>Chip 50GB</li>
+                        <li>TV 250+ Canais</li>
+                        <li>Ligações Ilimitadas</li>
+                        <li>WhatsApp Grátis</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20Combo%20550%20Mega%20%2B%2050GB%20%2B%20TV" class="plan-cta">Contratar Agora</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="badge">ECONOMIZE</div>
+                    <div class="plan-header">
+                        <div class="plan-name">Combo 600 Mega</div>
+                        <div class="plan-speed">Internet + Chip + TV</div>
+                    </div>
+                    <div class="plan-price">R$ 214,80<small>/mês</small></div>
+                    <div class="price-breakdown">
+                        <p class="label">Separado custaria:</p>
+                        <p>Internet 600M: R$ 99,90</p>
+                        <p>Chip 50GB: R$ 94,90</p>
+                        <p>TV 250+: R$ 20,00</p>
+                        <p class="original">Total: R$ 214,80</p>
+                        <p class="savings">💰 Economiza: R$ 0,00</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li>600 Mbps Internet</li>
+                        <li>Chip 50GB</li>
+                        <li>TV 250+ Canais</li>
+                        <li>Ligações Ilimitadas</li>
+                        <li>WhatsApp Grátis</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20Combo%20600%20Mega%20%2B%2050GB%20%2B%20TV" class="plan-cta">Contratar Agora</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="badge">ECONOMIZE</div>
+                    <div class="plan-header">
+                        <div class="plan-name">Combo 700 Mega</div>
+                        <div class="plan-speed">Internet + Chip + TV</div>
+                    </div>
+                    <div class="plan-price">R$ 225,80<small>/mês</small></div>
+                    <div class="price-breakdown">
+                        <p class="label">Separado custaria:</p>
+                        <p>Internet 700M: R$ 110,90</p>
+                        <p>Chip 50GB: R$ 94,90</p>
+                        <p>TV 250+: R$ 20,00</p>
+                        <p class="original">Total: R$ 225,80</p>
+                        <p class="savings">💰 Economiza: R$ 0,00</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li>700 Mbps Internet</li>
+                        <li>Chip 50GB</li>
+                        <li>TV 250+ Canais</li>
+                        <li>Ligações Ilimitadas</li>
+                        <li>WhatsApp Grátis</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20Combo%20700%20Mega%20%2B%2050GB%20%2B%20TV" class="plan-cta">Contratar Agora</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHIPS TAB -->
+        <div id="chips" class="tab-content">
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-name">Chip 11GB</div>
+                        <div class="plan-speed">Dados móveis</div>
+                    </div>
+                    <div class="plan-price">R$ 49,90<small>/mês</small></div>
+                    <ul class="plan-features">
+                        <li>11GB de dados</li>
+                        <li>Ligações Ilimitadas</li>
+                        <li>WhatsApp Grátis</li>
+                        <li>Qualquer operadora</li>
+                        <li>Sem contrato</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20Chip%2011GB" class="plan-cta">Contratar Agora</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-name">Chip 15GB</div>
+                        <div class="plan-speed">Dados móveis</div>
+                    </div>
+                    <div class="plan-price">R$ 54,60<small>/mês</small></div>
+                    <ul class="plan-features">
+                        <li>15GB de dados</li>
+                        <li>Ligações Ilimitadas</li>
+                        <li>WhatsApp Grátis</li>
+                        <li>Qualquer operadora</li>
+                        <li>Sem contrato</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20Chip%2015GB" class="plan-cta">Contratar Agora</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-name">Chip 20GB</div>
+                        <div class="plan-speed">Dados móveis</div>
+                    </div>
+                    <div class="plan-price">R$ 64,90<small>/mês</small></div>
+                    <ul class="plan-features">
+                        <li>20GB de dados</li>
+                        <li>Ligações Ilimitadas</li>
+                        <li>WhatsApp Grátis</li>
+                        <li>Qualquer operadora</li>
+                        <li>Sem contrato</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20Chip%2020GB" class="plan-cta">Contratar Agora</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-name">Chip 28GB</div>
+                        <div class="plan-speed">Dados móveis</div>
+                    </div>
+                    <div class="plan-price">R$ 74,90<small>/mês</small></div>
+                    <ul class="plan-features">
+                        <li>28GB de dados</li>
+                        <li>Ligações Ilimitadas</li>
+                        <li>WhatsApp Grátis</li>
+                        <li>Qualquer operadora</li>
+                        <li>Sem contrato</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20Chip%2028GB" class="plan-cta">Contratar Agora</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-name">Chip 50GB</div>
+                        <div class="plan-speed">Dados móveis</div>
+                    </div>
+                    <div class="plan-price">R$ 94,90<small>/mês</small></div>
+                    <ul class="plan-features">
+                        <li>50GB de dados</li>
+                        <li>Ligações Ilimitadas</li>
+                        <li>WhatsApp Grátis</li>
+                        <li>Qualquer operadora</li>
+                        <li>Sem contrato</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20o%20Chip%2050GB" class="plan-cta">Contratar Agora</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- TV TAB -->
+        <div id="tv" class="tab-content">
+            <div class="plans-grid">
+                <div class="plan-card" style="grid-column: 1 / -1;">
+                    <div class="plan-header">
+                        <div class="plan-name">LS Connect TV</div>
+                        <div class="plan-speed">250+ Canais ao Vivo</div>
+                    </div>
+                    <div class="plan-price">R$ 30,00<small>/mês</small></div>
+                    <div style="margin: 20px 0; padding: 20px; background: #f0f7ff; border-radius: 10px; border-left: 4px solid #0052CC;">
+                        <p style="color: #0052CC; font-weight: 600; margin-bottom: 10px;">💰 Preço especial em combos: R$ 20,00/mês</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li>250+ Canais ao vivo</li>
+                        <li>Futebol, séries e filmes</li>
+                        <li>Qualidade HD</li>
+                        <li>Sem contrato</li>
+                        <li>Suporte 24/7</li>
+                    </ul>
+                    <a href="https://wa.me/5583987114547?text=Quero%20contratar%20a%20LS%20Connect%20TV" class="plan-cta">Contratar Agora</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMPARAÇÃO TAB -->
+        <div id="comparacao" class="tab-content">
+            <div class="comparison-section">
+                <h2>📊 Comparação de Planos de Internet</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Plano</th>
+                            <th class="feature-value">Velocidade</th>
+                            <th class="feature-value">Preço</th>
+                            <th class="feature-value">WiFi 6</th>
+                            <th class="feature-value">Instalação</th>
+                            <th class="feature-value">Suporte 24/7</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">60 Mega</td>
+                            <td class="feature-value">60 Mbps</td>
+                            <td class="feature-value">R$ 65,00</td>
+                            <td class="feature-value yes">✓</td>
+                            <td class="feature-value yes">Grátis</td>
+                            <td class="feature-value yes">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">150 Mega</td>
+                            <td class="feature-value">150 Mbps</td>
+                            <td class="feature-value">R$ 69,90</td>
+                            <td class="feature-value yes">✓</td>
+                            <td class="feature-value yes">Grátis</td>
+                            <td class="feature-value yes">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">250 Mega</td>
+                            <td class="feature-value">250 Mbps</td>
+                            <td class="feature-value">R$ 75,90</td>
+                            <td class="feature-value yes">✓</td>
+                            <td class="feature-value yes">Grátis</td>
+                            <td class="feature-value yes">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">350 Mega</td>
+                            <td class="feature-value">350 Mbps</td>
+                            <td class="feature-value">R$ 79,90</td>
+                            <td class="feature-value yes">✓</td>
+                            <td class="feature-value yes">Grátis</td>
+                            <td class="feature-value yes">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">450 Mega</td>
+                            <td class="feature-value">450 Mbps</td>
+                            <td class="feature-value">R$ 85,90</td>
+                            <td class="feature-value yes">✓</td>
+                            <td class="feature-value yes">Grátis</td>
+                            <td class="feature-value yes">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">550 Mega</td>
+                            <td class="feature-value">550 Mbps</td>
+                            <td class="feature-value">R$ 89,90</td>
+                            <td class="feature-value yes">✓</td>
+                            <td class="feature-value yes">Grátis</td>
+                            <td class="feature-value yes">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">600 Mega</td>
+                            <td class="feature-value">600 Mbps</td>
+                            <td class="feature-value">R$ 99,90</td>
+                            <td class="feature-value yes">✓</td>
+                            <td class="feature-value yes">Grátis</td>
+                            <td class="feature-value yes">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">700 Mega</td>
+                            <td class="feature-value">700 Mbps</td>
+                            <td class="feature-value">R$ 110,90</td>
+                            <td class="feature-value yes">✓</td>
+                            <td class="feature-value yes">Grátis</td>
+                            <td class="feature-value yes">✓</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="info-section">
+                <h2>ℹ️ Informações Importantes</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>🚀 Velocidade Real</h3>
+                        <p>Com fibra óptica, você recebe 95-100% da velocidade contratada. Diferente de outras tecnologias que oferecem apenas 30-50%.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>💰 Sem Contrato</h3>
+                        <p>Todos os planos são sem contrato de fidelidade. Você pode cancelar quando quiser, sem multa ou taxas adicionais.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>📦 Instalação Grátis</h3>
+                        <p>A instalação é totalmente grátis. Técnicos especializados levam a fibra até sua casa em 1-2 horas.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>📱 WiFi 6 Incluído</h3>
+                        <p>Todos os planos incluem modem WiFi 6 de última geração para melhor cobertura e velocidade.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>🎁 Combos com Desconto</h3>
+                        <p>Contrate Internet + Chip + TV e economize até R$ 5,00 por mês em relação aos preços separados.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>🆘 Suporte 24/7</h3>
+                        <p>Suporte disponível 24 horas por dia, 7 dias por semana via WhatsApp, telefone e Central do Assinante.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/5583987114547" target="_blank">💬</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h3>LS Connect Telecom</h3>
+            <p>Internet de Fibra Óptica FTTH - Bairro Mário Andreazza, Bayeux - PB</p>
+            
+            <div class="footer-links">
+                <a href="https://wa.me/5583987114547" target="_blank">WhatsApp: (83) 98711-4547</a>
+                <a href="https://www.instagram.com/lsconnect_lgtelecom/" target="_blank">Instagram</a>
+                <a href="https://www.facebook.com/lsconnectlgtelecom" target="_blank">Facebook</a>
+                <a href="https://lsconnect.centralassinante.com.br/#/login" target="_blank">Central do Assinante</a>
+            </div>
+
+            <p>&copy; 2026 LS Connect Telecom. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
